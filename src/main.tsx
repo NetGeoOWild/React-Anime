@@ -12,7 +12,7 @@ const queryClient = new QueryClient();
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
+    <BrowserRouter basename="/React-Anime">
       <App />
     </BrowserRouter>
 
