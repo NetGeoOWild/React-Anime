@@ -9,4 +9,5 @@ export default defineConfig({
       "@": import.meta.dirname + "/src",
     },
   },
+  base: "React-Anime",
 });
