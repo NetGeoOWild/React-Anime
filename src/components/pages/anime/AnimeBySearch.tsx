@@ -1,18 +1,18 @@
-import { Button } from "../common/Button";
-import { AnimeCardPreview } from "./AnimeCardPreview";
+import { Button } from "../../common/Button";
+import { AnimeCardPreview } from "../../anime/AnimeCardPreview";
 import { useEffect, useRef } from "react";
-import { Loader } from "../common/Loader";
-import { Error } from "../common/Error";
-import { AnimeCardPreviewSkeleton } from "./AnimeCardPreviewSkeleton";
+import { Loader } from "../../common/Loader";
+import { Error } from "../../common/Error";
+import { AnimeCardPreviewSkeleton } from "../../anime/AnimeCardPreviewSkeleton";
 import { Link, useSearchParams } from "react-router";
-import { useAnimeByGenre } from "@/hooks/useAnimeByGenre";
+import { useAnimeBySearch } from "@/hooks/useAnimeBySearch";
 
-export function AnimeGenre() {
+export function AnimeBySearch() {
   const bottomRef = useRef<HTMLDivElement>(null);
   const shouldScroll = useRef(false);
   const prevDataLength = useRef(0);
   const [searchParams] = useSearchParams();
-  const genre = searchParams.get("genre");
+  const search = searchParams.get("search");
 
   const {
     data,
@@ -23,7 +23,7 @@ export function AnimeGenre() {
     error,
     isFetchNextPageError,
     isPending,
-  } = useAnimeByGenre(genre);
+  } = useAnimeBySearch(search!);
 
   const animeList = data?.pages.flatMap((page) => page.data);
 
@@ -51,8 +51,8 @@ export function AnimeGenre() {
     prevDataLength.current = currListLength;
   }, [animeList?.length]);
 
-  if (!genre) {
-    return <Error message="Genre not specified" />;
+  if (!search) {
+    return <Error message="Search not specified" />;
   }
 
   if (isPending) {
@@ -64,13 +64,13 @@ export function AnimeGenre() {
   }
 
   if (!animeList || animeList.length === 0) {
-    return <Error message="No anime found" />;
+    return <Error message={`For Request "${search}" - No anime found.`} />;
   }
 
   return (
     <div className="pt-12.5">
       <h4 className="mb-3.5 text-4xl max-lg:text-3xl max-md:text-2xl max-sm:text-xl">
-        {genre}
+        Request: {search}
       </h4>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -91,7 +91,7 @@ export function AnimeGenre() {
         <Error message="Could not load more, try later" />
       )}
 
-      <div className="mb-40 pt-12.5 text-center">
+      <div className="mb-40 w-full max-w-75 pt-12.5 text-center">
         <Button
           fill={false}
           text={"View More"}

@@ -1,7 +1,7 @@
-import { Error } from "../common/Error";
-import { AnimeHighlightsCard } from "./AnimeHighlightsCard";
+import { Error } from "../../common/Error";
+import { AnimeHighlightsCard } from "../../anime/AnimeHighlightsCard";
 import { useTopAnime } from "@/hooks/useTopAnime";
-import { AnimeHighlightsCardSkeleton } from "./AnimeHighlightsCardSkeleton";
+import { AnimeHighlightsCardSkeleton } from "../../anime/AnimeHighlightsCardSkeleton";
 import { Link } from "react-router";
 
 export function AnimeHighlights() {

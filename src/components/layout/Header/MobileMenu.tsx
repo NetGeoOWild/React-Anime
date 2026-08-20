@@ -2,14 +2,39 @@ import { X } from "lucide-react";
 import { Button } from "../../common/Button";
 import { motion } from "motion/react";
 import { MobileCategories } from "./MobileCategories";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { SearchInput } from "./SearchInput";
+import { useAuthStore } from "@/store/authStore";
+import { useState } from "react";
+import { signOut } from "@/api/authApi";
+import { toast } from "react-toastify";
 
 type Props = {
   toggleMenu: () => void;
 };
 
 export function MobileMenu({ toggleMenu }: Props) {
+  const authStore = useAuthStore();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  async function handleLogOut() {
+    setLoading(true);
+
+    try {
+      await signOut();
+      toast.success("Logout successful!");
+      authStore.setAuth(null, null);
+      navigate("/");
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       {/* Overlay */}
@@ -35,11 +60,16 @@ export function MobileMenu({ toggleMenu }: Props) {
       >
         <div className="mb-2.5 flex items-center justify-between">
           <h2 className="text-xl font-bold">Menu</h2>
-
           <button onClick={toggleMenu} className="cursor-pointer">
             <X />
           </button>
         </div>
+
+        {authStore.session && (
+          <span className="mb-5 block text-left text-lg text-white">
+            <span>Hello</span>: {authStore.user?.email}
+          </span>
+        )}
 
         <SearchInput toggleMenu={toggleMenu} />
 
@@ -51,10 +81,26 @@ export function MobileMenu({ toggleMenu }: Props) {
             <MobileCategories toggleMenu={toggleMenu} />
           </div>
 
-          <div className="flex flex-col gap-3.75 pb-3.75">
-            <Button fill={true} text="Sign up" />
-            <Button fill={false} text="Sign in" />
-          </div>
+          {!authStore.session && (
+            <div className="flex flex-col gap-3.75 pb-3.75">
+              <Button fill={true} text="Sign up" />
+              <Button fill={false} text="Sign in" />
+            </div>
+          )}
+
+          {authStore.session && (
+            <div className="flex flex-col gap-3.75 pb-3.75">
+              <Link to="/favorites">
+                <Button fill={true} text="Favorites" />
+              </Link>
+              <Button
+                onClick={handleLogOut}
+                fill={false}
+                text={loading ? "Exit..." : "Log out"}
+                disabled={loading}
+              />
+            </div>
+          )}
         </div>
       </motion.div>
     </>

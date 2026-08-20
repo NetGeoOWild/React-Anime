@@ -1,18 +1,16 @@
-import { Button } from "../common/Button";
-import { AnimeCardPreview } from "./AnimeCardPreview";
+import { useAnimeList } from "@/hooks/useAnimeList";
+import { Button } from "../../common/Button";
+import { AnimeCardPreview } from "../../anime/AnimeCardPreview";
 import { useEffect, useRef } from "react";
-import { Loader } from "../common/Loader";
-import { Error } from "../common/Error";
-import { AnimeCardPreviewSkeleton } from "./AnimeCardPreviewSkeleton";
-import { Link, useSearchParams } from "react-router";
-import { useAnimeBySearch } from "@/hooks/useAnimeBySearch";
+import { Loader } from "../../common/Loader";
+import { Error } from "../../common/Error";
+import { AnimeCardPreviewSkeleton } from "../../anime/AnimeCardPreviewSkeleton";
+import { Link } from "react-router";
 
-export function AnimeBySearch() {
+export function Anime() {
   const bottomRef = useRef<HTMLDivElement>(null);
   const shouldScroll = useRef(false);
   const prevDataLength = useRef(0);
-  const [searchParams] = useSearchParams();
-  const search = searchParams.get("search");
 
   const {
     data,
@@ -23,7 +21,7 @@ export function AnimeBySearch() {
     error,
     isFetchNextPageError,
     isPending,
-  } = useAnimeBySearch(search!);
+  } = useAnimeList();
 
   const animeList = data?.pages.flatMap((page) => page.data);
 
@@ -51,10 +49,6 @@ export function AnimeBySearch() {
     prevDataLength.current = currListLength;
   }, [animeList?.length]);
 
-  if (!search) {
-    return <Error message="Search not specified" />;
-  }
-
   if (isPending) {
     return <AnimeCardPreviewSkeleton />;
   }
@@ -64,13 +58,13 @@ export function AnimeBySearch() {
   }
 
   if (!animeList || animeList.length === 0) {
-    return <Error message={`For Request "${search}" - No anime found.`} />;
+    return <Error message="No anime found" />;
   }
 
   return (
-    <div className="pt-12.5">
+    <div>
       <h4 className="mb-3.5 text-4xl max-lg:text-3xl max-md:text-2xl max-sm:text-xl">
-        Request: {search}
+        Anime
       </h4>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -91,7 +85,7 @@ export function AnimeBySearch() {
         <Error message="Could not load more, try later" />
       )}
 
-      <div className="mb-40 pt-12.5 text-center">
+      <div className="mx-auto mb-40 w-full max-w-75 pt-12.5 text-center">
         <Button
           fill={false}
           text={"View More"}
