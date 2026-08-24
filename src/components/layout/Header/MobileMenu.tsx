@@ -90,7 +90,7 @@ export function MobileMenu({ toggleMenu }: Props) {
 
           {authStore.session && (
             <div className="flex flex-col gap-3.75 pb-3.75">
-              <Link to="/favorites">
+              <Link to="/favorites" onClick={toggleMenu}>
                 <Button fill={true} text="Favorites" />
               </Link>
               <Button

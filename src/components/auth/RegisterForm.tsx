@@ -40,7 +40,7 @@ export function RegisterForm() {
 
   return (
     <div className="mx-auto w-full max-w-168.75">
-      <h4 className="mb-2.5 text-center text-3xl">Register</h4>
+      <h4 className="mb-2.5 text-center text-3xl">Registration</h4>
       <form
         className="border-my-accent/50 flex flex-col rounded-lg border-2 p-3.75"
         onSubmit={handleSubmit}

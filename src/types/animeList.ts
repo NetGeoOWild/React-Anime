@@ -7,7 +7,7 @@ type AnilistTitle = {
   romaji: string;
 };
 
-type AnilistMedia = {
+export type AnilistMedia = {
   idMal: number;
   title: AnilistTitle;
   coverImage: AnilistCoverImage;

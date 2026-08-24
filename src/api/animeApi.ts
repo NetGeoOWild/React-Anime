@@ -4,6 +4,10 @@ import type {
   AnimeDescription,
   AnimeGenres,
 } from "@/types/anime";
+import type {
+  AnilistResponseFavorites,
+  AnimeCardFavoritesPreview,
+} from "@/types/animeFavorites";
 import type { AnilistGenresListResponse } from "@/types/animeGenresList";
 import type { AnilistAnimeByIdResponse } from "@/types/animeInfo";
 import type { AnilistResponseList } from "@/types/animeList";
@@ -347,5 +351,57 @@ export async function getAnimeListByGenre(
     }),
 
     pageInfo: responsePage.pageInfo,
+  };
+}
+
+export async function getAnimeFavorites(
+  ids: number[],
+): Promise<AnimeCardFavoritesPreview> {
+  const variables = {
+    ids,
+  };
+
+  const queryQl = `query ($ids: [Int]) {
+   Page {
+      media(idMal_in: $ids, type: ANIME) {
+        idMal
+        title {
+        english
+        romaji
+        }
+        coverImage {
+        large
+        }
+      }
+    }
+  }`;
+
+  const response = await fetch(apiUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: queryQl,
+      variables: variables,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch anime");
+  }
+
+  const responseData: AnilistResponseFavorites = await response.json();
+
+  const responsePage = responseData.data.Page;
+
+  return {
+    data: responsePage.media.map((anime) => {
+      return {
+        mal_id: anime.idMal,
+        image: anime.coverImage.large,
+        title: anime.title.english ?? anime.title.romaji,
+      };
+    }),
   };
 }
