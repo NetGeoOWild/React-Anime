@@ -1,41 +1,36 @@
-import { useState } from "react";
 import { Button } from "../common/Button";
 import { useAuthStore } from "@/store/authStore";
 import { signIn } from "@/api/authApi";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { loginSchema, type LogInFormData } from "@/utils/validation/login";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const authStore = useAuthStore();
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<LogInFormData>({
+    resolver: zodResolver(loginSchema),
+  });
 
-  function cleanHandler() {
-    setEmail("");
-    setPassword("");
-  }
-
-  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    setLoading(true);
-
+  async function onSubmit(data: LogInFormData) {
     try {
-      const data = await signIn(email, password);
+      const result = await signIn(data.email, data.password);
       toast.success("Sign-in successful!");
-      authStore.setAuth(data.user, data.session);
+      authStore.setAuth(result.user, result.session);
       navigate("/");
     } catch (err) {
       if (err instanceof Error) {
         toast.error(err.message);
+        reset();
       }
-    } finally {
-      setLoading(false);
     }
-
-    cleanHandler();
   }
 
   return (
@@ -43,7 +38,7 @@ export function LoginForm() {
       <h4 className="mb-2.5 text-center text-3xl">Login</h4>
       <form
         className="border-my-accent/50 mb-5 flex flex-col rounded-lg border-2 p-3.75"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <label htmlFor="email" className="mb-1.25 text-lg">
           E-mail
@@ -51,27 +46,31 @@ export function LoginForm() {
         <input
           id="email"
           type="email"
-          value={email}
+          {...register("email")}
           placeholder="Enter email"
           className="placeholder:text-[#E5E5E5]focus:outline focus:ring-my-accent relative mb-2.5 rounded-[5px] bg-[#302D2D] py-3.25 pr-5.75 pl-9.5 text-white focus:ring-2 focus:outline-none max-xl:py-2.25 max-xl:text-sm"
-          onChange={(e) => setEmail(e.target.value)}
         />
+        {errors.email && (
+          <div className="mb-2.5 text-red-500">{errors.email.message}</div>
+        )}
         <label htmlFor="password" className="mb-1.25 text-lg">
           Password
         </label>
         <input
           id="password"
           type="password"
-          value={password}
+          {...register("password")}
           placeholder="Enter password"
           className="placeholder:text-[#E5E5E5]focus:outline focus:ring-my-accent relative mb-5 rounded-[5px] bg-[#302D2D] py-3.25 pr-5.75 pl-9.5 text-white focus:ring-2 focus:outline-none max-xl:py-2.25 max-xl:text-sm"
-          onChange={(e) => setPassword(e.target.value)}
         />
+        {errors.password && (
+          <div className="mb-2.5 text-red-500">{errors.password.message}</div>
+        )}
         <div>
           <Button
-            text={loading ? "Logging in..." : "Sign in"}
+            text={isSubmitting ? "Logging in..." : "Sign in"}
             fill={true}
-            disabled={loading}
+            disabled={isSubmitting}
           />
         </div>
       </form>
