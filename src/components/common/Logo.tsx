@@ -7,9 +7,9 @@ export function Logo() {
       <img
         src={logo}
         alt="logo"
-        className="max-xl:h-8.75 max-xl:w-8.75 max-sm:h-6.25 max-sm:w-6.25"
+        className="brightness-0 max-xl:h-8.75 max-xl:w-8.75 max-sm:h-6.25 max-sm:w-6.25 dark:invert"
       />
-      <span className="font-aubrey text-5xl max-xl:text-3xl max-sm:text-2xl">
+      <span className="font-aubrey text-5xl text-black max-xl:text-3xl max-sm:text-2xl dark:text-white">
         Anime Online
       </span>
     </Link>

@@ -8,6 +8,7 @@ import { useAuthStore } from "@/store/authStore";
 import { useState } from "react";
 import { signOut } from "@/api/authApi";
 import { toast } from "react-toastify";
+import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 
 type Props = {
   toggleMenu: () => void;
@@ -40,7 +41,7 @@ export function MobileMenu({ toggleMenu }: Props) {
       {/* Overlay */}
       <motion.div
         onClick={toggleMenu}
-        className={`fixed inset-0 z-450 bg-white/15`}
+        className={`fixed inset-0 z-450 bg-black/65 dark:bg-white/65`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -49,7 +50,7 @@ export function MobileMenu({ toggleMenu }: Props) {
 
       {/* Menu */}
       <motion.div
-        className={`after:bg-my-accent fixed top-0 right-0 z-500 flex h-dvh w-full max-w-70 flex-col bg-black p-2.5 after:absolute after:bottom-0 after:left-0 after:block after:h-1 after:w-full`}
+        className={`dark:after:bg-my-accent after:bg-light-theme fixed top-0 right-0 z-500 flex h-dvh w-full max-w-70 flex-col bg-mist-400 p-2.5 text-black after:absolute after:bottom-0 after:left-0 after:block after:h-1 after:w-full dark:bg-[#161515] dark:text-white`}
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
@@ -59,14 +60,17 @@ export function MobileMenu({ toggleMenu }: Props) {
         }}
       >
         <div className="mb-2.5 flex items-center justify-between">
-          <h2 className="text-xl font-bold">Menu</h2>
+          <h2 className="flex w-full max-w-53.25 items-center justify-between text-xl font-bold">
+            Menu
+            <ThemeSwitch />
+          </h2>
           <button onClick={toggleMenu} className="cursor-pointer">
             <X />
           </button>
         </div>
 
         {authStore.session && (
-          <span className="mb-5 block text-left text-lg text-white">
+          <span className="mb-5 block truncate text-left text-lg text-black dark:text-white">
             <span>Hello</span>: {authStore.user?.email}
           </span>
         )}
@@ -75,7 +79,11 @@ export function MobileMenu({ toggleMenu }: Props) {
 
         <div className="flex flex-1 flex-col justify-between">
           <div className="pt-3.75">
-            <Link to="/" className="block p-1.5 text-lg" onClick={toggleMenu}>
+            <Link
+              to="/"
+              className="block p-1.5 text-lg text-black dark:text-white"
+              onClick={toggleMenu}
+            >
               Home
             </Link>
             <MobileCategories toggleMenu={toggleMenu} />

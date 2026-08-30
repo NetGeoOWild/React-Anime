@@ -69,7 +69,7 @@ export function AnimeBySearch() {
 
   return (
     <div className="pt-12.5">
-      <h4 className="mb-3.5 text-4xl max-lg:text-3xl max-md:text-2xl max-sm:text-xl">
+      <h4 className="mb-3.5 text-4xl text-black max-lg:text-3xl max-md:text-2xl max-sm:text-xl dark:text-white">
         Request: {search}
       </h4>
 
@@ -91,7 +91,7 @@ export function AnimeBySearch() {
         <Error message="Could not load more, try later" />
       )}
 
-      <div className="mb-40 w-full max-w-75 pt-12.5 text-center">
+      <div className="mx-auto mb-40 w-full max-w-75 pt-12.5 text-center">
         <Button
           fill={false}
           text={"View More"}

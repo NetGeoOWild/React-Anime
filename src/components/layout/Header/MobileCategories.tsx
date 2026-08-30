@@ -24,22 +24,30 @@ export function MobileCategories({ toggleMenu }: Props) {
   return (
     <Accordion value={activeItem} onValueChange={setActiveItem}>
       <AccordionItem>
-        <AccordionTrigger className="aria-expanded:bg-my-accent/50 mb-2.5 p-1.5 text-lg">
+        <AccordionTrigger className="dark:aria-expanded:bg-my-accent/50 aria-expanded:bg-light-theme/50 mb-2.5 p-1.5 text-lg font-normal text-black dark:text-white">
           Categories
         </AccordionTrigger>
 
         <AccordionContent>
-          <div className="flex max-h-60 w-56 flex-col gap-2 overflow-y-auto">
-            {isLoading && <div>Loading genres...</div>}
+          <div className="dark:border-my-accent/50 border-light-theme/50 flex max-h-50 flex-col gap-2 overflow-y-auto rounded-[5px] border-2 bg-white text-black dark:bg-black dark:text-white">
+            {isLoading && (
+              <div className="text-black dark:text-white">
+                Loading genres...
+              </div>
+            )}
 
-            {isError && <div>Genres unavailable</div>}
+            {isError && (
+              <div className="text-black dark:text-white">
+                Genres unavailable
+              </div>
+            )}
 
             {data?.genres.map((genre) => {
               return (
                 <Link
                   key={genre}
                   to={`/anime?genre=${encodeURIComponent(genre)}`}
-                  className="hover:bg-my-accent/50 mb-2.5 block text-center text-lg text-white duration-300"
+                  className="dark:hover:bg-my-accent/50 hover:bg-light-theme/50 mb-2.5 block text-center text-lg text-black duration-300 dark:text-white"
                   onClick={handleMenu}
                 >
                   {genre}

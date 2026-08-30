@@ -56,7 +56,7 @@ function NavigationMenuItem({
 }
 
 const navigationMenuTriggerStyle = cva(
-  "group/navigation-menu-trigger inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all outline-none hover:bg-my-accent/50 focus:bg-my-accent/50 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-popup-open:bg-my-accent/50 data-popup-open:hover:bg-my-accent/50 data-open:bg-my-accent/50 data-open:hover:bg-my-accent/50 data-open:focus:bg-my-accent/50 text-white",
+  "group/navigation-menu-trigger inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-all outline-none dark:hover:bg-my-accent/50 hover:bg-light-theme/50 dark:focus:bg-my-accent/50 focus:bg-light-theme/50 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 dark:data-popup-open:bg-my-accent/50 data-popup-open:bg-light-theme/50 dark:data-popup-open:hover:bg-my-accent/50 data-popup-open:hover:bg-light-theme/50 dark:data-open:bg-my-accent/50 data-open:bg-light-theme/50 dark:data-open:hover:bg-my-accent/50 data-open:hover:bg-light-theme/50 dark:data-open:focus:bg-my-accent/50 data-open:focus:bg-light-theme/50 text-black dark:text-white",
 );
 
 function NavigationMenuTrigger({
@@ -111,12 +111,12 @@ function NavigationMenuPositioner({
         align={align}
         alignOffset={alignOffset}
         className={cn(
-          "isolate z-50 h-(--positioner-height) w-(--positioner-width) max-w-(--available-width) transition-[top,left,right,bottom] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-instant:transition-none data-[side=bottom]:before:-top-2.5 data-[side=bottom]:before:right-0 data-[side=bottom]:before:left-0",
+          "isolate z-50 h-(--positioner-height) max-w-(--available-width) transition-[top,left,right,bottom] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-instant:transition-none data-[side=bottom]:before:-top-2.5 data-[side=bottom]:before:right-0 data-[side=bottom]:before:left-0",
           className,
         )}
         {...props}
       >
-        <NavigationMenuPrimitive.Popup className="data-[ending-style]:easing-[ease] xs:w-(--popup-width) bg-popover text-popover-foreground ring-foreground/10 relative h-(--popup-height) w-(--popup-width) origin-(--transform-origin) rounded-lg shadow ring-1 transition-[opacity,transform,width,height,scale,translate] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] outline-none data-ending-style:scale-90 data-ending-style:opacity-0 data-ending-style:duration-150 data-starting-style:scale-90 data-starting-style:opacity-0">
+        <NavigationMenuPrimitive.Popup className="data-[ending-style]:easing-[ease] xs:w-(--popup-width) ring-foreground/10 origin-(--transform-origin) ring-1 transition-[opacity,transform,width,height,scale,translate] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-ending-style:scale-90 data-ending-style:opacity-0 data-ending-style:duration-150 data-starting-style:scale-90 data-starting-style:opacity-0">
           <NavigationMenuPrimitive.Viewport className="relative size-full overflow-hidden" />
         </NavigationMenuPrimitive.Popup>
       </NavigationMenuPrimitive.Positioner>
@@ -132,7 +132,7 @@ function NavigationMenuLink({
     <NavigationMenuPrimitive.Link
       data-slot="navigation-menu-link"
       className={cn(
-        "hover:bg-my-accent/50 focus:bg-my-accent/50 focus-visible:ring-ring/50 data-[active=true]:bg-my-accent/50 data-[active=true]:hover:bg-my-accent/550 data-[active=true]:focus:bg-my-accent/50 flex items-center gap-1.5 rounded-md p-2 text-sm transition-all outline-none focus-visible:ring-3 focus-visible:outline-1 in-data-[slot=navigation-menu-content]:rounded-sm [&_svg:not([class*='size-'])]:size-4",
+        "dark:hover:bg-my-accent/50 dark:focus:bg-my-accent/50 focus-visible:ring-ring/50 dark:data-[active=true]:bg-my-accent/50 dark:data-[active=true]:hover:bg-my-accent/50 dark:data-[active=true]:focus:bg-my-accent/50 hover:bg-light-theme/50 focus:bg-light-theme/50 data-[active=true]:bg-light-theme/50 data-[active=true]:hover:bg-light-theme/50 data-[active=true]:focus:bg-light-theme/50 flex items-center gap-1.5 rounded-md p-2 text-sm transition-all outline-none focus-visible:ring-3 focus-visible:outline-1 in-data-[slot=navigation-menu-content]:rounded-sm [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}

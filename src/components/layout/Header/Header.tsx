@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router";
 import { useAuthStore } from "@/store/authStore";
 import { signOut } from "@/api/authApi";
 import { toast } from "react-toastify";
+import { ThemeSwitch } from "@/components/common/ThemeSwitch";
 
 export function Header() {
   const [loading, setLoading] = useState(false);
@@ -42,7 +43,7 @@ export function Header() {
 
   return (
     <>
-      <header className="pt-9.5">
+      <header className="sticky top-0 z-45 bg-mist-400 py-5 dark:bg-[#161515]">
         <div className="container">
           <div className="flex items-center justify-between">
             <Logo />
@@ -50,6 +51,7 @@ export function Header() {
               <div className="flex items-center gap-6.25">
                 <Navigation />
                 <SearchInput />
+                {authStore.session && <ThemeSwitch />}
 
                 {!authStore.session && (
                   <div className="flex items-center gap-6.25">
@@ -59,10 +61,12 @@ export function Header() {
                     <Link to="/login">
                       <Button fill={false} text="Sign in" />
                     </Link>
+                    <ThemeSwitch />
                   </div>
                 )}
               </div>
             )}
+
             {!showMenu && (
               <Menu
                 className="hidden cursor-pointer max-lg:block"
@@ -74,21 +78,23 @@ export function Header() {
       </header>
 
       {authStore.session && !isMobile && (
-        <div className="sticky top-0 z-50 container bg-black">
-          <div className="flex items-center justify-between py-5">
-            <span className="block text-left text-lg text-white">
-              <span>Hello</span>: {authStore.user?.email}
-            </span>
-            <div className="flex items-center gap-6.25">
-              <Link to="/favorites">
-                <Button fill={true} text="Favorites" />
-              </Link>
-              <Button
-                onClick={handleLogOut}
-                fill={false}
-                text={loading ? "Exit..." : "Log out"}
-                disabled={loading}
-              />
+        <div className="sticky top-18 z-45 bg-mist-400 dark:bg-[#161515]">
+          <div className="container">
+            <div className="flex items-center justify-between py-5">
+              <span className="block max-w-75 truncate text-left text-lg text-black dark:text-white">
+                <span>Hello</span>: {authStore.user?.email}
+              </span>
+              <div className="flex items-center gap-6.25">
+                <Link to="/favorites">
+                  <Button fill={true} text="Favorites" />
+                </Link>
+                <Button
+                  onClick={handleLogOut}
+                  fill={false}
+                  text={loading ? "Exit..." : "Log out"}
+                  disabled={loading}
+                />
+              </div>
             </div>
           </div>
         </div>

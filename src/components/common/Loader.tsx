@@ -5,7 +5,7 @@ export function Loader() {
     <div className="flex justify-center py-10">
       <button
         type="button"
-        className="bg-my-accent flex items-center gap-1.5 rounded-[5px] p-2.5"
+        className="dark:bg-my-accent bg-light-theme flex items-center gap-1.5 rounded-[5px] p-2.5"
         disabled
       >
         <LoaderCircle className="animate-spin" />

@@ -61,17 +61,17 @@ export function AnimeDetails() {
             />
             {authStore.session && (
               <Heart
-                className={`text-my-accent/70 absolute top-2.5 right-2.5 z-25 size-7 cursor-pointer transition-all duration-300 hover:scale-[1.2] ${isFavorite ? "fill-my-accent text-my-accent" : "fill-white"}`}
+                className={`dark:text-my-accent/70 text-light-theme/70 absolute top-2.5 right-2.5 z-25 size-7 cursor-pointer transition-all duration-300 hover:scale-[1.2] ${isFavorite ? "dark:fill-my-accent dark:text-my-accent fill-light-theme text-light-theme" : "fill-white"}`}
                 onClick={favoriteHandler}
               />
             )}
-            <span className="bg-my-accent absolute top-3 left-3 flex h-15 w-15 items-center justify-center rounded-full font-bold">
+            <span className="dark:bg-my-accent bg-light-theme absolute top-3 left-3 flex h-15 w-15 items-center justify-center rounded-full font-bold">
               {data?.averageScore}/100
             </span>
           </div>
-          <div className="bg-my-accent/30 relative basis-1/2 rounded-lg p-2.5">
+          <div className="dark:bg-my-accent/30 bg-light-theme/30 relative basis-1/2 rounded-lg p-2.5">
             <ButtonWithIcon
-              className="bg-my-accent absolute -top-15 right-0 z-50 rounded-full max-lg:fixed max-lg:top-20 max-lg:right-9"
+              className="dark:bg-my-accent bg-light-theme absolute -top-15 right-0 z-50 rounded-full text-black max-lg:fixed max-lg:top-20 max-lg:right-9 dark:text-white"
               icon={CircleChevronLeftIcon}
               onClick={() => navigate(-1)}
             />

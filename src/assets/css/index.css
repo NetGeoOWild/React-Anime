@@ -9,6 +9,7 @@
   --font-aubrey: "Aubrey", sans-serif;
   --font-roboto: "Roboto", sans-serif;
   --color-my-accent: #bd00ff;
+  --color-light-theme: #34d399;
 }
 
 @theme inline {
@@ -136,9 +137,14 @@
 }
 
 body {
+  font-family: var(--font-roboto);
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.dark body {
   color: #ffffff;
   background-color: #000000;
-  font-family: var(--font-roboto);
 }
 
 .container {

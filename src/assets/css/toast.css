@@ -1,0 +1,84 @@
+:root {
+  --toast--success-text: #000000;
+  --toast-success-bg: #ffffff;
+  --toast-success-border: #34d399;
+  --toast-error-bg: #ffffff;
+  --toast-error-border: #f43f5e;
+}
+
+.dark {
+  --toast--success-text: #ffffff;
+  --toast-success-bg: #161515;
+  --toast-success-border: #bd00ff;
+  --toast-error-bg: #161515;
+  --toast-error-border: #f32222;
+}
+
+.Toastify__toast--success {
+  background-color: var(--toast-success-bg) !important;
+  border: 2px solid var(--toast-success-border) !important;
+  color: var(--toast--success-text) !important;
+}
+
+.Toastify__progress-bar--success {
+  background: var(--toast-success-border) !important;
+}
+
+.Toastify__toast--success button {
+  opacity: 0.7 !important;
+  color: var(--toast--success-text) !important;
+}
+
+.Toastify__toast--success .Toastify--animate-icon svg {
+  fill: var(--toast-success-border);
+}
+
+.Toastify__toast--error {
+  background-color: var(--toast-error-bg) !important;
+  border: 2px solid var(--toast-error-border) !important;
+  color: var(--toast--success-text) !important;
+}
+
+.Toastify__progress-bar--error {
+  background: var(--toast-error-border) !important;
+}
+
+.Toastify__toast--error button {
+  opacity: 0.7 !important;
+  color: var(--toast--success-text) !important;
+}
+
+/*DARK*/
+.dark .Toastify__toast--success {
+  background-color: var(--toast-success-bg) !important;
+  border: 2px solid var(--toast-success-border) !important;
+  color: var(--toast--success-text) !important;
+}
+
+.dark .Toastify__progress-bar--success {
+  background: var(--toast-success-border) !important;
+}
+
+.dark .Toastify__toast--success button {
+  opacity: 1 !important;
+  color: var(--toast--success-text) !important;
+}
+
+.dark .Toastify__toast--success .Toastify--animate-icon svg {
+  fill: var(--toast-success-border);
+}
+
+.dark .Toastify__toast--error {
+  background-color: var(--toast-error-bg) !important;
+  border: 2px solid var(--toast-error-border) !important;
+  color: var(--toast--success-text) !important;
+}
+
+.dark .Toastify__progress-bar--error {
+  background: var(--toast-error-border) !important;
+}
+
+.dark .Toastify__toast--error button {
+  opacity: 1 !important;
+  color: var(--toast--success-text) !important;
+}

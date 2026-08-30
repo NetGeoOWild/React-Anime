@@ -50,7 +50,7 @@ export const AnimeHighlightsCard = memo(({ card, className }: Props) => {
       />
       {authStore.session && (
         <Heart
-          className={`text-my-accent/70 absolute top-2.5 right-2.5 z-25 size-7 cursor-pointer transition-all duration-300 hover:scale-[1.2] ${isFavorite ? "fill-my-accent text-my-accent" : "fill-white"}`}
+          className={`dark:text-my-accent/70 text-light-theme/70 absolute top-2.5 right-2.5 z-25 size-7 cursor-pointer transition-all duration-300 hover:scale-[1.2] ${isFavorite ? "dark:fill-my-accent dark:text-my-accent fill-light-theme text-light-theme" : "fill-white"}`}
           onClick={favoriteHandler}
         />
       )}

@@ -47,7 +47,7 @@ export function Favorites() {
 
   return (
     <div className="py-10">
-      <h4 className="mb-3.5 text-4xl max-lg:text-3xl max-md:text-2xl max-sm:text-xl">
+      <h4 className="mb-3.5 text-4xl text-black max-lg:text-3xl max-md:text-2xl max-sm:text-xl dark:text-white">
         Favorites
       </h4>
 
