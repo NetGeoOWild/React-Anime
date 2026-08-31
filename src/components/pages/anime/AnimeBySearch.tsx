@@ -1,6 +1,5 @@
 import { Button } from "../../common/Button";
 import { AnimeCardPreview } from "../../anime/AnimeCardPreview";
-import { useEffect, useRef } from "react";
 import { Loader } from "../../common/Loader";
 import { Error } from "../../common/Error";
 import { AnimeCardPreviewSkeleton } from "../../anime/AnimeCardPreviewSkeleton";
@@ -8,9 +7,6 @@ import { Link, useSearchParams } from "react-router";
 import { useAnimeBySearch } from "@/hooks/useAnimeBySearch";
 
 export function AnimeBySearch() {
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const shouldScroll = useRef(false);
-  const prevDataLength = useRef(0);
   const [searchParams] = useSearchParams();
   const search = searchParams.get("search");
 
@@ -28,28 +24,8 @@ export function AnimeBySearch() {
   const animeList = data?.pages.flatMap((page) => page.data);
 
   async function handleLoadMore() {
-    prevDataLength.current = animeList?.length ?? 0;
-    shouldScroll.current = true;
-
     await fetchNextPage();
   }
-
-  useEffect(() => {
-    if (!shouldScroll.current) return;
-
-    const currListLength = animeList?.length ?? 0;
-
-    if (currListLength > prevDataLength.current) {
-      requestAnimationFrame(() => {
-        bottomRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      });
-    }
-
-    prevDataLength.current = currListLength;
-  }, [animeList?.length]);
 
   if (!search) {
     return <Error message="Search not specified" />;
@@ -82,8 +58,6 @@ export function AnimeBySearch() {
           );
         })}
       </div>
-
-      <div ref={bottomRef}></div>
 
       {isFetchingNextPage && <Loader />}
 

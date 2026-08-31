@@ -5,7 +5,7 @@ import { MobileCategories } from "./MobileCategories";
 import { Link, useNavigate } from "react-router";
 import { SearchInput } from "./SearchInput";
 import { useAuthStore } from "@/store/authStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signOut } from "@/api/authApi";
 import { toast } from "react-toastify";
 import { ThemeSwitch } from "@/components/common/ThemeSwitch";
@@ -35,6 +35,14 @@ export function MobileMenu({ toggleMenu }: Props) {
       setLoading(false);
     }
   }
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  });
 
   return (
     <>
