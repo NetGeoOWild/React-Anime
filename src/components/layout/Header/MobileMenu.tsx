@@ -51,7 +51,7 @@ export function MobileMenu({ toggleMenu }: Props) {
       {/* Overlay */}
       <motion.div
         onClick={toggleMenu}
-        className={`touch-action: none; fixed inset-0 z-450 bg-black/65 dark:bg-white/65`}
+        className="fixed inset-0 z-450 bg-black/65 dark:bg-white/65"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -60,7 +60,7 @@ export function MobileMenu({ toggleMenu }: Props) {
 
       {/* Menu */}
       <motion.div
-        className={`dark:after:bg-my-accent after:bg-light-theme fixed top-0 right-0 z-500 flex h-dvh w-full max-w-70 flex-col bg-mist-400 p-2.5 text-black after:absolute after:bottom-0 after:left-0 after:block after:h-1 after:w-full dark:bg-[#161515] dark:text-white`}
+        className={`dark:after:bg-my-accent after:bg-light-theme fixed top-0 right-0 z-500 flex h-svh w-full max-w-70 flex-col bg-mist-400 p-2.5 text-black after:absolute after:bottom-0 after:left-0 after:block after:h-1 after:w-full dark:bg-[#161515] dark:text-white`}
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
         exit={{ x: "100%" }}

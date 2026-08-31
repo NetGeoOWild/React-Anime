@@ -6,7 +6,7 @@ import tyan_3 from "@/assets/images/tyan_3.gif";
 
 export function AuthLayout() {
   return (
-    <div className="flex min-h-dvh flex-col bg-mist-400/50 dark:bg-black/50">
+    <div className="flex min-h-svh flex-col bg-mist-400/50 dark:bg-black/50">
       <Header />
       <main className="flex flex-1 items-center">
         <div className="container">
