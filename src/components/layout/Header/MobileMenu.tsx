@@ -37,12 +37,12 @@ export function MobileMenu({ toggleMenu }: Props) {
   }
 
   useEffect(() => {
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
-    document.body.style.overscrollBehavior = "none";
 
     return () => {
+      document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
-      document.body.style.overscrollBehavior = "";
     };
   }, []);
 
