@@ -38,18 +38,20 @@ export function MobileMenu({ toggleMenu }: Props) {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    document.body.style.overscrollBehavior = "none";
 
     return () => {
       document.body.style.overflow = "";
+      document.body.style.overscrollBehavior = "";
     };
-  });
+  }, []);
 
   return (
     <>
       {/* Overlay */}
       <motion.div
         onClick={toggleMenu}
-        className={`fixed inset-0 z-450 bg-black/65 dark:bg-white/65`}
+        className={`touch-action: none; fixed inset-0 z-450 bg-black/65 dark:bg-white/65`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
