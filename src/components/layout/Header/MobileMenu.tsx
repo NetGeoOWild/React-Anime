@@ -101,8 +101,12 @@ export function MobileMenu({ toggleMenu }: Props) {
 
           {!authStore.session && (
             <div className="flex flex-col gap-3.75 pb-3.75">
-              <Button fill={true} text="Sign up" />
-              <Button fill={false} text="Sign in" />
+              <Link to="/register" onClick={toggleMenu}>
+                <Button fill={true} text="Sign up" />
+              </Link>
+              <Link to="/login" onClick={toggleMenu}>
+                <Button fill={false} text="Sign in" />
+              </Link>
             </div>
           )}
 
