@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router";
+import { HashRouter } from "react-router";
 import { ThemeProvider } from "./context/ThemeProvider";
 import { App } from "@/App";
 import "@/assets/css/index.css";
@@ -14,11 +14,11 @@ const queryClient = new QueryClient();
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter basename="/React-Anime">
+    <HashRouter>
       <ThemeProvider>
         <App />
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
 
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>,

@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import { MainLayout } from "./components/layout/MainLayout";
 import { Home } from "./components/layout/Home/Home";
 import { AnimeDetails } from "./components/pages/anime/AnimeDetails";
@@ -11,8 +11,7 @@ import { Reset } from "./components/pages/auth/Reset";
 import { Favorites } from "./components/pages/anime/Favorites";
 
 export function AppRouter() {
-  return (
-  <HashRouter>
+  return (  
     <Routes>
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
@@ -26,7 +25,6 @@ export function AppRouter() {
         <Route path="forget" element={<Forget />} />
         <Route path="reset" element={<Reset />} />
       </Route>
-    </Routes>
-  </HashRouter>
+    </Routes>  
   );
 }

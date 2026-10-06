@@ -63,6 +63,7 @@ export function LoginForm() {
           type="password"
           {...register("password")}
           placeholder="Enter password"
+          autoComplete="off"
           className="dark:focus:ring-my-accent focus:ring-light-theme relative mb-5 rounded-[5px] bg-mist-600 py-3.25 pr-5.75 pl-9.5 text-white placeholder:text-white focus:ring-2 focus:outline focus:outline-none max-xl:py-2.25 max-xl:text-sm dark:bg-[#302D2D] dark:placeholder:text-[#E5E5E5]"
         />
         {errors.password && (
